@@ -1,11 +1,18 @@
-class DealWithTxt(list):
+class DealWithList():
 
-    def compare_list_for_all_between_part(list_all,list_part_of):
-        # 保留剩下的
-        list_result = []
-        for i in range(len(list_all)):
-            a = list_all[i]
-            for j in range(len((list_part_of))):
-                b = list_part_of[j]
-                if b != a :
-                    list_result.
+    def list_a_and_b(a,b):
+        r = list(set(a) & set(b))
+        r.sort()
+        return r
+
+    def list_a_or_b(a,b):
+        return list(set(a) | set(b))
+
+    def list_a_have_b(a,b):
+        return list(set(a) - set(b))
+
+    def list_b_have_a(a,b):
+        return list(set(b) - set(a))
+
+    def list_not_have_a_and_b(a,b):
+        return list(set(a) ^ set(b))
