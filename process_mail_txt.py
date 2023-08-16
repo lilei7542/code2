@@ -86,14 +86,11 @@ def get_deleted_and_keep_about_insert(list_contain_insert):
     return list_deleted,list_keep
 
 
+def action_do(list_contain_table_head,list_keep,list_contain_table_end):
+    result_action_do = list_contain_table_head+list_keep+list_contain_table_end
+    return result_action_do
 
 
-
-
-'''
-
-def get_for_action_use():
-    return None
-
-'''
-
+def action_recover_contain_new_add(list_contain_table_head,list_contain_insert,list_add_new,list_contain_table_end):
+    result_recover_add_new = list_contain_table_head+list_contain_insert+list_add_new+list_contain_table_end
+    return result_recover_add_new
