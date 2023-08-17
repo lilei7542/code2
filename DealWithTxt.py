@@ -24,8 +24,10 @@ class DealWithTxt(object):
         return path_from
 
     def list_to_txt(list, filepath):
-        f = open(filepath, 'w')
+
+
+        f = open(filepath, 'w',encoding='utf-8')
         for line in list:
-            f.write(line + '\n')
+            f.write(line)
         f.close()
 

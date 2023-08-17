@@ -92,11 +92,10 @@ def action_do(list_contain_table_head,list_keep,list_contain_table_end):
     return result_list_action_do
 
 #恢复包含新增的list
-def action_recover_get_new_list(list_old_head, list_old_deleted, list_new_not_head):
+def action_recover_get_new_list(list_old_head, list_old_deleted, list_new_keeped+):
     result_list_recover_get_new = list_old_head + list_old_deleted + list_new_not_head
     return result_list_recover_get_new
 
-#list 转化为 txt
 
 
 

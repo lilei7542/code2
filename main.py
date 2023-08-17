@@ -20,4 +20,5 @@ def print_hi(name):
 if __name__ == '__main__':
     print_hi('PyCharm')
     print('\033[92m' + "请仔细阅读操作手册")
+    print(colors.RED+'LOOK')
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
