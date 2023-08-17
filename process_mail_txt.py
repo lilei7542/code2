@@ -6,16 +6,7 @@
 ######################################3####
 # -*- coding: utf-8 -*-
 import time
-
-
-
-# list to file
-def list_to_txt(list,filepath):
-    f = open(filepath, 'w')
-    for line in list:
-        f.write(line + '\n')
-    f.close()
-
+from CaculateWithList import CaculateWithList
 
 # file to part of list
 def load_contain_insert_and_table_head_and_end_to_list(filepath):
@@ -32,7 +23,7 @@ def load_contain_insert_and_table_head_and_end_to_list(filepath):
     list_contain_table_end = line_read[-9:]
     list_contain_not_head = line_read[3:]
 
-    return list_contain_insert,list_contain_table_head,list_contain_table_end,list_contain_not_head
+    return list_contain_insert,list_contain_table_head,list_contain_table_end,list_contain_not_head,line_read
 
 def load_contain_insert_to_list(filepath):
     #装载包含insert的list
@@ -64,6 +55,7 @@ def deal_time(normal_time):
     timestamp = time.mktime(timeArray)
     return timestamp
 
+#针对old insert list
 def get_deleted_and_keep_about_insert(list_contain_insert):
     list_deleted = []
     list_keep = []
@@ -86,14 +78,20 @@ def get_deleted_and_keep_about_insert(list_contain_insert):
 
     return list_deleted,list_keep
 
+#求new added
+def get_added_about_insert(list_action_done_all,list_action_recover_at_the_moment):
+    list_added = CaculateWithList.list_b_have_a(list_action_done_all,list_action_recover_at_the_moment)
+    return list_added
+
+
 #只包含特定时间之后的list
 def action_do(list_contain_table_head,list_keep,list_contain_table_end):
     result_list_action_do = list_contain_table_head+list_keep+list_contain_table_end
     return result_list_action_do
 
 #恢复包含新增的list
-def action_recover_get_new_list(list_old_head, list_old_deleted, list_new_keeped+):
-    result_list_recover_get_new = list_old_head + list_old_deleted + list_new_not_head
+def action_recover_get_new_list(list_old_head, list_old_deleted, list_new_keeped,list_new_added,list_old_end):
+    result_list_recover_get_new = list_old_head + list_old_deleted + list_new_keeped + list_new_added + list_old_end
     return result_list_recover_get_new
 
 
