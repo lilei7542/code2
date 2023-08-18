@@ -10,20 +10,27 @@ filepath_ori = DealWithTxt.process_wrong_enter(filepath_ori)
 filepath_action_done = filepath_ori+'.action.result'
 filepath_action_done = DealWithTxt.process_wrong_enter(filepath_action_done)    #设置只保留特定时间，包含新增加的内容，最后导出的文件
 
+
+filepath_action_recover_at_the_moment = filepath_ori+'.action.recover_at_the_moment'  #恢复时包含add的新文件
+filepath_action_recover_at_the_moment =DealWithTxt.process_wrong_enter(filepath_action_recover_at_the_moment)
+
 filepath_action_recover_done = filepath_ori+'.action.recover.result'  #恢复完成后的文件
 
 
 if(os.path.exists(filepath_action_recover_done)):
     print("the program have been execute")
 else:
-    list_old_contain_insert,list_old_contain_table_head,list_old_contain_table_end,list_old_contain_not_head = process_mail_txt.load_contain_insert_and_table_head_and_end_to_list(filepath_ori)
-    action_done_list_contain_insert,action_done_list_contain_table_head,action_done_list_contain_table_end,action_done_list_contain_not_head = process_mail_txt.load_contain_insert_and_table_head_and_end_to_list(filepath_action_done)
+    list_old_contain_insert,list_old_contain_table_head,list_old_contain_table_end,list_old_contain_not_head,list_old_all = process_mail_txt.load_contain_insert_and_table_head_and_end_to_list(filepath_ori)
+    action_done_list_contain_insert,action_done_list_contain_table_head,action_done_list_contain_table_end,action_done_list_contain_not_head,list_action_done_all = process_mail_txt.load_contain_insert_and_table_head_and_end_to_list(filepath_action_done)
 
     list_old_deleted,list_old_keep = process_mail_txt.get_deleted_and_keep_about_insert(list_old_contain_insert)
 
-    result_list_recover_get_new = process_mail_txt.action_recover_get_new_list(list_old_contain_table_head,list_old_deleted,list_old_contain_not_head)
+    list_recover_at_the_moment = DealWithTxt.txt_to_list(filepath_action_recover_at_the_moment)
 
-    print(len(result_list_recover_get_new))
+    list_new_added = process_mail_txt.get_added_about_insert(list_action_done_all,list_recover_at_the_moment)
+
+    result_list_recover_get_new = process_mail_txt.action_recover_get_new_list(list_old_contain_table_head,list_old_deleted,list_old_keep,list_new_added,list_old_contain_table_end)
+
 
     DealWithTxt.list_to_txt(result_list_recover_get_new,filepath_action_recover_done)
 

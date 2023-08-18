@@ -12,7 +12,7 @@ filepath_action_done = filepath_ori+'.action.result'
 if(os.path.exists(filepath_action_done)):
     print("the program have been execute")
 else:
-    list_contain_insert,list_contain_table_head,list_contain_table_end,list_contain_not_head = process_mail_txt.load_contain_insert_and_table_head_and_end_to_list(filepath_ori)
+    list_contain_insert,list_contain_table_head,list_contain_table_end,list_contain_not_head,list_all = process_mail_txt.load_contain_insert_and_table_head_and_end_to_list(filepath_ori)
 
     list_deleted,list_keep = process_mail_txt.get_deleted_and_keep_about_insert(list_contain_insert)
 
