@@ -69,7 +69,13 @@ def get_deleted_and_keep_about_insert(list_contain_insert):
         except:
             print('error in string to float')
         else:
-            before_set_time = '2023-06-30 0:0:0'
+            # before_set_time = '2023-06-30 0:0:0'
+
+            from configparser import ConfigParser
+            parser = ConfigParser()
+            parser.read('config.ini', encoding='utf-8')
+            before_set_time = parser.get('time','before_set_time')
+
             before_set_unix_time = deal_time(before_set_time)
             if before_set_unix_time > send_time and before_set_unix_time > reversed_time:
                 list_deleted.append(list_contain_insert[i]) #删除的insert内容

@@ -23,3 +23,11 @@ if (os.path.exists('message_ass.db.03.txt')):
     print(1)
 else:
     print(2)
+
+
+from configparser import ConfigParser
+parser = ConfigParser()
+parser.read('config.ini',encoding='utf-8')
+filepath_ori = parser.get('file','filepath_ori')
+
+print(filename)

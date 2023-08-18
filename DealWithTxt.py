@@ -37,3 +37,16 @@ class DealWithTxt(object):
             list = file.readlines()
             file.close()
         return list
+
+
+
+    def file_not_exist(filepath):
+        if(not (os.path.exists(filepath))):
+            print (filepath+' is not exist,exiting now')
+            exit()
+
+
+    def file_exist(filepath):
+        if (os.path.exists(filepath)):
+            print(filepath + ' is exist,exiting now')
+            exit()
