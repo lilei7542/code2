@@ -1,10 +1,12 @@
 from DealWithTxt import DealWithTxt
 import process_mail_txt
 from configparser import ConfigParser
+from SqliteDbTxtTransfer import SqliteDbTxtTransfer
+from  SwitchToDirectory import SwitchToDirectory
 
-def action_do():
+def action_do(user):
     parser = ConfigParser()
-    parser.read('config.ini',encoding='utf-8')
+    parser.read('config_global.ini',encoding='utf-8')
 
     filepath_ori = parser.get('file','filepath_ori')  #数据库导出的源文件路径
     DealWithTxt.file_not_exist(filepath_ori)
@@ -20,8 +22,18 @@ def action_do():
 
     result_list_action_do = process_mail_txt.action_do(list_contain_table_head,list_keep,list_contain_table_end)
 
-    DealWithTxt.list_to_txt(result_list_action_do,filepath_action_done)
-    print("action_do_done")
+    filepath_action_done = DealWithTxt.list_to_txt(result_list_action_do,filepath_action_done)
+
+    message_db_path = SwitchToDirectory.swtich_to_get_message_db_path(user)
+    message_db_path_bak_for_original = message_db_path+'.bak.for.original'
+    SqliteDbTxtTransfer.rename_the_file_name(message_db_path,message_db_path_bak_for_original)
+
+    message_db_path_action_done = SqliteDbTxtTransfer.txt_to_db(filepath_action_done)
+    message_db_path_action_done_now = message_db_path_action_done.replace('.action.done','')
+    SqliteDbTxtTransfer.rename_the_file_name(message_db_path_action_done, message_db_path_action_done_now)
+
+
+    print(user+" action_do_done")
 
 
 

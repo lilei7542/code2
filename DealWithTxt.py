@@ -31,6 +31,8 @@ class DealWithTxt(object):
             f.write(line)
         f.close()
 
+        return filepath
+
 
     def txt_to_list(filepath):
         with open(filepath, 'r', encoding='utf-8', errors='ignore') as file:

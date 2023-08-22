@@ -27,10 +27,17 @@ else:
 
 from configparser import ConfigParser
 parser = ConfigParser()
-parser.read('config.ini',encoding='utf-8')
+parser.read('config_global.ini',encoding='utf-8')
 filepath_ori = parser.get('file','filepath_ori')
 
 print(filepath_ori)
 
 
 print('/')
+
+
+s = 'one two one two one'
+
+print(s.replace(' ', '-'))
+
+print(s)

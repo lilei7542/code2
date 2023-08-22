@@ -73,7 +73,7 @@ def get_deleted_and_keep_about_insert(list_contain_insert):
 
             from configparser import ConfigParser
             parser = ConfigParser()
-            parser.read('config.ini', encoding='utf-8')
+            parser.read('config_global.ini', encoding='utf-8')
             before_set_time = parser.get('time','before_set_time')
 
             before_set_unix_time = deal_time(before_set_time)

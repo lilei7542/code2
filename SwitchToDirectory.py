@@ -19,13 +19,14 @@ class SwitchToDirectory():
         os.system("cd %s" %(user))
 
 
-    def print_current_path():
-        print(os.system('pwd'))
+    def get_current_path():
+        return  (os.system('pwd'))
 
-    def swtich_to_get_message_db(user):
+    def swtich_to_get_message_db_path(user):
         swtich_to_root_base()
         os.system("cd account")
         os.system("cd %s" %(user))
         os.system("cd ts")
         path = os.system("pwd")
         return path+"/message_ass.db"
+

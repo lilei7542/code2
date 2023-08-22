@@ -5,13 +5,13 @@ import action_do
 
 def main():
     parser = ConfigParser()
-    parser.read('config.ini', encoding='utf-8')
+    parser.read('config_global.ini', encoding='utf-8')
     filepath_ori = parser.get('file', 'filepath_ori')
 
-    root_base = parser.get('all_user','root_base')
+    ssmec_com = parser.get('all_user','ssmec_com')
     filepath_user_list = parser.get('all_user', 'filepath_user_list')
 
-    SwitchToDirectory.swtich_to_specific_base(root_base)
+    SwitchToDirectory.swtich_to_specific_base(ssmec_com)
     # SwitchToDirectory.swtich_to_root_base()
     # SwitchToDirectory.print_current_path()
 

@@ -2,10 +2,10 @@ from DealWithTxt import DealWithTxt
 import process_mail_txt
 from configparser import ConfigParser
 
-def action_recover_done():
+def action_recover_done(user_config_ini):
 
     parser = ConfigParser()
-    parser.read('config.ini',encoding='utf-8')
+    parser.read(user_config_ini,encoding='utf-8')
     filepath_ori = parser.get('file','filepath_ori')  #数据库导出的源文件路径
     DealWithTxt.file_not_exist(filepath_ori)
     filepath_ori = DealWithTxt.process_wrong_enter(filepath_ori)
