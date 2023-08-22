@@ -30,4 +30,7 @@ parser = ConfigParser()
 parser.read('config.ini',encoding='utf-8')
 filepath_ori = parser.get('file','filepath_ori')
 
-print(filename)
+print(filepath_ori)
+
+
+print('/')
