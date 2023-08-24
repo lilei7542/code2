@@ -1,17 +1,18 @@
 ###########################################
-#2023.08.11                               #
-#修改邮箱展示数据库的内容                     #
-#删除特定时间之前的邮箱内容（涉及发件箱，收件箱等）#
-#lilei                                    #
+# 2023.08.11                               #
+# 修改邮箱展示数据库的内容                     #
+# 删除特定时间之前的邮箱内容（涉及发件箱，收件箱等）#
+# lilei                                    #
 ######################################3####
 # -*- coding: utf-8 -*-
 import time
 from CaculateWithList import CaculateWithList
 
+
 # file to part of list
 def load_contain_insert_and_table_head_and_end_to_list(filepath):
-    #装载包含 insert,head,end 的list
-    with open(filepath,'r+',encoding='utf-8',errors='ignore') as file_ori:
+    # 装载包含 insert,head,end 的list
+    with open(filepath, 'r+', encoding='utf-8', errors='ignore') as file_ori:
         line_read = file_ori.readlines()
         file_ori.close()
 
@@ -23,11 +24,12 @@ def load_contain_insert_and_table_head_and_end_to_list(filepath):
     list_contain_table_end = line_read[-9:]
     list_contain_not_head = line_read[3:]
 
-    return list_contain_insert,list_contain_table_head,list_contain_table_end,list_contain_not_head,line_read
+    return list_contain_insert, list_contain_table_head, list_contain_table_end, list_contain_not_head, line_read
+
 
 def load_contain_insert_to_list(filepath):
-    #装载包含insert的list
-    with open(filepath,'r+',encoding='utf-8',errors='ignore') as file_ori:
+    # 装载包含insert的list
+    with open(filepath, 'r+', encoding='utf-8', errors='ignore') as file_ori:
         line_read = file_ori.readlines()
         file_ori.close()
 
@@ -39,7 +41,7 @@ def load_contain_insert_to_list(filepath):
 
 def load_contain_table_head_and_end_to_list(filepath):
     # 装载包含head end 的list
-    with open(filepath,'r+',encoding='utf-8',errors='ignore') as file_ori:
+    with open(filepath, 'r+', encoding='utf-8', errors='ignore') as file_ori:
         line_read = file_ori.readlines()
         file_ori.close()
 
@@ -47,7 +49,7 @@ def load_contain_table_head_and_end_to_list(filepath):
     list_contain_table_head = line_read[:3]
     list_contain_table_end = line_read[-9:]
 
-    return list_contain_table_head,list_contain_table_head
+    return list_contain_table_head, list_contain_table_head
 
 
 def deal_time(normal_time):
@@ -55,11 +57,12 @@ def deal_time(normal_time):
     timestamp = time.mktime(timeArray)
     return timestamp
 
-#针对old insert list
+
+# 针对old insert list
 def get_deleted_and_keep_about_insert(list_contain_insert):
     list_deleted = []
     list_keep = []
-    for i in range(0,len(list_contain_insert)):
+    for i in range(0, len(list_contain_insert)):
         # list_contain_time_about_line = list_contain_insert[i].strip("\n").split(",")
         list_contain_time_about_line = list_contain_insert[i].split(",")
 
@@ -74,34 +77,30 @@ def get_deleted_and_keep_about_insert(list_contain_insert):
             from configparser import ConfigParser
             parser = ConfigParser()
             parser.read('config_global.ini', encoding='utf-8')
-            before_set_time = parser.get('time','before_set_time')
+            before_set_time = parser.get('time', 'before_set_time')
 
             before_set_unix_time = deal_time(before_set_time)
             if before_set_unix_time > send_time and before_set_unix_time > reversed_time:
-                list_deleted.append(list_contain_insert[i]) #删除的insert内容
+                list_deleted.append(list_contain_insert[i])  # 删除的insert内容
             else:
                 list_keep.append(list_contain_insert[i])
 
-    return list_deleted,list_keep
+    return list_deleted, list_keep
 
-#求new added
-def get_added_about_insert(list_action_done_all,list_action_recover_at_the_moment):
-    list_added = CaculateWithList.list_b_have_a(list_action_done_all,list_action_recover_at_the_moment)
+
+# 求new added
+def get_added_about_insert(list_action_done_all, list_action_recover_at_the_moment):
+    list_added = CaculateWithList.list_b_have_a(list_action_done_all, list_action_recover_at_the_moment)
     return list_added
 
 
-#只包含特定时间之后的list
-def action_do(list_contain_table_head,list_keep,list_contain_table_end):
-    result_list_action_do = list_contain_table_head+list_keep+list_contain_table_end
+# 只包含特定时间之后的list
+def action_do(list_contain_table_head, list_keep, list_contain_table_end):
+    result_list_action_do = list_contain_table_head + list_keep + list_contain_table_end
     return result_list_action_do
 
-#恢复包含新增的list
-def action_recover_get_new_list(list_old_head, list_old_deleted, list_new_keeped,list_new_added,list_old_end):
+
+# 恢复包含新增的list
+def action_recover_get_new_list(list_old_head, list_old_deleted, list_new_keeped, list_new_added, list_old_end):
     result_list_recover_get_new = list_old_head + list_old_deleted + list_new_keeped + list_new_added + list_old_end
     return result_list_recover_get_new
-
-
-
-
-
-
