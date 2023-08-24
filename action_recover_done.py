@@ -1,8 +1,10 @@
 from DealWithTxt import DealWithTxt
 import process_mail_txt
 from configparser import ConfigParser
+from SqliteDbTxtTransfer import SqliteDbTxtTransfer
+from SwitchToDirectory import SwitchToDirectory
 
-def action_recover_done(user_config_ini):
+def action_recover_done(user,user_config_ini):
 
     parser = ConfigParser()
     parser.read(user_config_ini,encoding='utf-8')
@@ -33,8 +35,17 @@ def action_recover_done(user_config_ini):
 
     result_list_recover_get_new = process_mail_txt.action_recover_get_new_list(list_old_contain_table_head,list_old_deleted,list_old_keep,list_new_added,list_old_contain_table_end)
 
-    DealWithTxt.list_to_txt(result_list_recover_get_new,filepath_action_recover_done)
+    filepath_action_recover_done = DealWithTxt.list_to_txt(result_list_recover_get_new,filepath_action_recover_done)
 
-    print("action_recover_done")
+    message_db_path = SwitchToDirectory.swtich_to_get_message_db_path(user)
+    message_db_path_back_for_action_recover = message_db_path.replace('.db','.db.bak.for.action.recover')
+    SqliteDbTxtTransfer.rename_the_file_name(message_db_path, message_db_path_back_for_action_recover)
+
+    message_db_path_action_recover_done = SqliteDbTxtTransfer.txt_to_db(filepath_action_recover_done)
+    message_db_path_action_recover_done_now = message_db_path_action_recover_done.replace('.action.recover.done','')
+    SqliteDbTxtTransfer.rename_the_file_name(message_db_path_action_recover_done,message_db_path_action_recover_done_now)
+
+
+    print(user+" action recover done")
 
     #需要优化， 字符格式，编码等

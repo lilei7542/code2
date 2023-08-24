@@ -4,9 +4,9 @@ from configparser import ConfigParser
 from SqliteDbTxtTransfer import SqliteDbTxtTransfer
 from  SwitchToDirectory import SwitchToDirectory
 
-def action_do(user):
+def action_do(user,user_config_ini):
     parser = ConfigParser()
-    parser.read('config_global.ini',encoding='utf-8')
+    parser.read(user_config_ini,encoding='utf-8')
 
     filepath_ori = parser.get('file','filepath_ori')  #数据库导出的源文件路径
     DealWithTxt.file_not_exist(filepath_ori)
@@ -33,8 +33,7 @@ def action_do(user):
     SqliteDbTxtTransfer.rename_the_file_name(message_db_path_action_done, message_db_path_action_done_now)
 
 
-    print(user+" action_do_done")
+    print(user+" action do done")
 
 
-
-####还需要再完善再优化 比如可以多次运
+    #改善点

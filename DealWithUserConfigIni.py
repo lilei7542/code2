@@ -31,3 +31,5 @@ class DealWithUserConfigIni():
             file.close()
 
     # def write_sqlite_config_to_user(user_config_ini,user):  #貌似不需要
+
+    # 考慮合併兩個函數
